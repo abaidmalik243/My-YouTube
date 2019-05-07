@@ -1,16 +1,13 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
-import axios from 'axios';
-
+// import axios from 'axios';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import { addVideo } from '../actions/videoActions';
 
 
@@ -43,69 +40,30 @@ class AddVideo extends React.Component {
 		this.state = {
 			title: '',
 			description: '',
-			// selectedFile: '',
-			// showImage: "",
 			imageUpload: null
 		}
 	}
 
 	handleChange = (e) => {
-		// const state = this.state;
-		// state[e.target.name] = e.target.value;
 		this.setState({
-			// state
 			[e.target.name]: e.target.value
 		})
 	}
 
 	handleSubmit = e => {
+		e.preventDefault();
 
 		let data = new FormData(); //formdata object
-		e.preventDefault();
-		// alert(this.BookName.value);
 		const { title, description, imageUpload } = this.state;
-		const frm = this.frm.reset();
 		data.append("title", title);
 		data.append("description", description);
 		data.append("imageUpload", imageUpload);
-		console.log("data insert time", data.get("imageUpload"));
-		axios
-		  .post("http://localhost:3000/video/add", data)
-		  .then(res => {
-			if (res) {
-				console.log('Record Saved')
-			//   toast.success("Record Save");
-			//   this.props.history.push("/showBook");
-			}
-		  })
-		  .catch(err => {
-			// toast.error(err);
-			console.log(err);
-		  });
 
-		// e.preventDefault();
-		// console.log('abaid');
-
-		// const data = new FormData() 
-		// console.log('data is: ', data);
-		// data.append('file', this.state.selectedFile)
-		// console.log('data2 is: ', data);
-
-		// axios.post('http://localhost:3000/video/add', data,
-		// {     
-		// 	headers: { 'content-type': 'multipart/form-data' }
-		// }
-		// )
-
-		// const data = {
-		// 	title: this.state.title,
-		// 	description: this.state.description,
-		// }
-		// this.props.addVideo(data);
+		this.props.addVideo(data);
+		this.frm.reset();
 	}
 
 	fileUpload = (e) => {
-		// console.log('file name is: ', e.target.files[0]);	
 		this.setState({
 			imageUpload: e.target.files[0]
 		})
@@ -115,8 +73,7 @@ class AddVideo extends React.Component {
 		const { classes } = this.props;
 		return (
 			<div style={homeStyle}>
-				<h1>Add video page</h1>
-				{/* <h2>Try searching for videos and watching them!</h2> */}
+				<h1>Add Video Page</h1>
 
 				<form className={classes.container} onSubmit={this.handleSubmit} ref={el => (this.frm = el)} encType="multipart/form-data" >
 					<TextField
@@ -126,7 +83,7 @@ class AddVideo extends React.Component {
 						className={classes.textField}
 						margin="normal"
 						onChange={this.handleChange}
-					/>
+					/><br />
 
 					<TextField
 						id="description"
@@ -135,7 +92,7 @@ class AddVideo extends React.Component {
 						className={classes.textField}
 						margin="normal"
 						onChange={this.handleChange}
-					/>
+					/><br /><br />
 
 					<input
 						accept="image/*"
@@ -148,7 +105,7 @@ class AddVideo extends React.Component {
 					/>
 					<label htmlFor="contained-button-file">
 						<Button variant="contained" component="span" className={classes.button}>
-							Upload
+							upload
         				</Button>
 					</label>
 

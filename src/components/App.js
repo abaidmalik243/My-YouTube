@@ -38,7 +38,7 @@ class App extends React.Component {
 					<div style={topMargin}></div>
 					<div style={content}>
 						<Switch>
-							<Route exact path='/' component={VideoThumbnail} />
+							<Route exact path='/' component={Home} />
 							<Route path='/add' component={AddVideo} />
 							<Route path='/signin' component={SignIn} />
 							{this.props.currentVideo &&

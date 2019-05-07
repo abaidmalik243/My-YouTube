@@ -2,10 +2,14 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer')
 const path = require('path');
+var fs = require("fs");
 const sql = require('../helper/sql.js');
 
 var storage = multer.diskStorage({
-    destination: './uploads',
+    // destination: './uploads',
+    destination: function (req, res, cb) {
+        cb(null, 'uploads/')
+    },
     filename: function (req, file, cb) {//replace function 
         cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
     }
@@ -13,11 +17,11 @@ var storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 1345330 },
-    fileFilter: function (req, file, cb) {
-        checkfile(file, cb);
+    // limits: { fileSize: 1345330 },
+    // fileFilter: function (req, file, cb) {
+    //     checkfile(file, cb);
 
-    }
+    // }
 });
 
 function checkfile(file, cb) {
@@ -47,6 +51,24 @@ router.post('/add', upload.single('imageUpload'), (req, res) => {
         }
     } else {
         console.log('No File Uploaded');
+    }
+
+});
+
+router.get("/getVideos", async function (req, res) {
+    var querySelect = "SELECT * FROM video";
+    sql.query(querySelect, async function (err, rows) {
+        if (err) throw err;
+        res.send(rows);
+    })
+});
+
+router.get("/getFile/:file", (req, res) => {
+
+    if (fs.existsSync(path.join(__dirname, "../uploads/" + req.params.file))) {
+        res.sendFile(path.join(__dirname, "../uploads/" + req.params.file));
+    } else {
+        res.send('file not found');
     }
 
 });
