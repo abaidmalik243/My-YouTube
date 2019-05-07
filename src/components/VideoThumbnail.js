@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchVideo, fetchChannelInfo, fetchVideoComments } from './../actions';
-import convertDate from '../methods/convertDate';
+// import convertDate from '../methods/convertDate';
 
 const videoThumbnailStyle = {
   display: "grid",
@@ -66,7 +66,7 @@ const VideoThumbnail = (props) => {
         <div style={infoStyle} onClick={() => handleVideoClick(props.videoId, props.channelId)}>
           <Link to={`/watch/${props.videoId}`}>
             <span style={videoTitleStyle}>{props.videoTitle}</span>
-            <p style={videoInfoStyle}>{props.channelTitle} {props.viewCount} • {convertDate(props.publishedAt)}</p>
+            {/* <p style={videoInfoStyle}>{props.channelTitle} {props.viewCount} • {convertDate(props.publishedAt)}</p> */}
             <p style={videoDescriptionStyle}>{props.videoDescription}</p>
           </Link>
         </div>

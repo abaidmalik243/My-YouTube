@@ -1,4 +1,5 @@
 import * as types from './../constants/ActionTypes';
+import video from './islam.mp4';
 
 export function fetchSearchResult(searchQuery) {
 	return function(dispatch) {
@@ -50,9 +51,10 @@ export const receiveSearch = (searchResults, pageToken) => ({
 });
 
 export function fetchVideo(videoId) {
+	// 'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,player&id=' + videoId + '&maxHeight=8192&maxWidth=8192&key=' + process.env.REACT_APP_API_KEY
 	return function(dispatch) {
 		dispatch(requestVideo());
-		return fetch('https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,player&id=' + videoId + '&maxHeight=8192&maxWidth=8192&key=' + process.env.REACT_APP_API_KEY)
+		return fetch(video)
 			.then(
 				response => response.json(),
 				error => console.log('An error occured.', error)

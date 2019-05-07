@@ -187,7 +187,9 @@ class TopNav extends React.Component {
                     <IconButton style={this.iconButtonStyle}><Apps style={this.iconStyle}/></IconButton>
                     {messageIcon}
                     <IconButton style={this.iconButtonStyle}><MoreVert style={this.iconStyle}/></IconButton>
-                    <Button style={this.signInButtonStyle}><span style={this.signInStyle}>SIGN IN</span></Button>
+                    <Link to="/signin">
+                        <Button style={this.signInButtonStyle}><span style={this.signInStyle}>SIGN IN</span></Button>
+                    </Link>
                 </div>
                 <Hidden lgUp>
                     <Drawer open={this.state.sideListOpen} onClose={this.toggleDrawer} transitionDuration={200}>

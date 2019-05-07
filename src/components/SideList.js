@@ -218,7 +218,12 @@ const SideList = (props) => {
             </div>
             <div style={sideListContentContainerStyle} className="scrollbar">
                 <div style={mainCategoriesContainerStyle}>
-                    <div style={props.location.pathname === '/' ? currentPageHomeContainerStyle: mainCategoriesStyle} className="hovered"><Home style={props.location.pathname === '/' ? currentPageHomeIconStyle: mainCategoryHomeIconStyle}/> Home</div>
+                    <Link to="/">
+                        <div style={props.location.pathname === '/' ? currentPageHomeContainerStyle: mainCategoriesStyle} className="hovered"><Home style={props.location.pathname === '/' ? currentPageHomeIconStyle: mainCategoryHomeIconStyle}/> Home</div>
+                    </Link>
+                    <Link to="/add">
+                        <div style={mainCategoriesStyle} className="hovered"><Whatshot style={mainCategoryOtherIconStyle} />Add Video</div>
+                    </Link>
                     <div style={mainCategoriesStyle} className="hovered"><Whatshot style={mainCategoryOtherIconStyle} />Trending</div>
                     <div style={mainCategoriesStyle} className="hovered"><History style={mainCategoryOtherIconStyle}/>History</div>
                 </div>
@@ -278,7 +283,7 @@ const SideList = (props) => {
                             <span style={aboutLabelStyle} className="link">Test new features</span>
                         </div>
                     </div>
-                    <div style={youTubeLLCStyle}><span style={youTubeLLCLabelStyle}>© 2018 YouTube, LLC</span></div>
+                    <div style={youTubeLLCStyle}><span style={youTubeLLCLabelStyle}>© 2019 YouTube, LLC</span></div>
                 </div>
             </div>
         </div>

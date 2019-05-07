@@ -1,5 +1,8 @@
 import React from 'react';
 import Home from './Home';
+import VideoThumbnail from './VideoThumbnail';
+import AddVideo from './AddVideo';
+import SignIn from './Signin';
 import TopNav from './TopNav';
 import Results from './Results';
 import Watch from './Watch';
@@ -16,7 +19,7 @@ class App extends React.Component {
 	}
 
 	getPadding(amount) {
-		this.setState({sideListPadding: amount})
+		this.setState({ sideListPadding: amount })
 	}
 
 	render() {
@@ -31,20 +34,22 @@ class App extends React.Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<TopNav getPadding={this.getPadding} sideListPadding={this.state.sideListPadding}/>
-					<div style={topMargin}></div> 
+					<TopNav getPadding={this.getPadding} sideListPadding={this.state.sideListPadding} />
+					<div style={topMargin}></div>
 					<div style={content}>
 						<Switch>
-							<Route exact path='/' component={Home} />
-							{ this.props.currentVideo &&
-								<Route exact path='/watch/:videoId' render={()=><Watch currentVideo={this.props.currentVideo} channelInfo={this.props.channelInfo} currentVideoComments={this.props.currentVideoComments}/>} />
+							<Route exact path='/' component={VideoThumbnail} />
+							<Route path='/add' component={AddVideo} />
+							<Route path='/signin' component={SignIn} />
+							{this.props.currentVideo &&
+								<Route exact path='/watch/:videoId' render={() => <Watch currentVideo={this.props.currentVideo} channelInfo={this.props.channelInfo} currentVideoComments={this.props.currentVideoComments} />} />
 							}
-							{ this.props.currentSearch &&
-								<Route exact path='/results/:searchQuery' render={()=><Results currentSearch={this.props.currentSearch} />}  rel="stylesheet" href="/style.css"/>
+							{this.props.currentSearch &&
+								<Route exact path='/results/:searchQuery' render={() => <Results currentSearch={this.props.currentSearch} />} rel="stylesheet" href="/style.css" />
 							}
 						</Switch>
 					</div>
-					
+
 				</div>
 			</BrowserRouter>
 
@@ -53,12 +58,12 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-		return {
-			currentSearch: state.currentSearch,
-			currentVideo: state.currentVideo.currentVideo,
-			channelInfo: state.currentVideo.channelInfo,
-			currentVideoComments: state.currentVideo.comments
-		};
-	}
+	return {
+		currentSearch: state.currentSearch,
+		currentVideo: state.currentVideo.currentVideo,
+		channelInfo: state.currentVideo.channelInfo,
+		currentVideoComments: state.currentVideo.comments
+	};
+}
 
 export default connect(mapStateToProps)(App);

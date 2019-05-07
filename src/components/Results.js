@@ -95,7 +95,7 @@ class Results extends React.Component {
 					{(searchResults) ?
 						<div style={this.resultItemsStyle}>
 							{Object.keys(searchResults).map(function(index) {
-								if (searchResults[index].id.kind === "youtube#video") {
+								if (true) {
 									return <VideoThumbnail
 										key={index}
 										videoTitle={searchResults[index].snippet.title}
