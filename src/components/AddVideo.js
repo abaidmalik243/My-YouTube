@@ -44,7 +44,7 @@ class AddVideo extends React.Component {
 			title: '',
 			description: '',
 			// selectedFile: '',
-			showImage: "",
+			// showImage: "",
 			imageUpload: null
 		}
 	}
